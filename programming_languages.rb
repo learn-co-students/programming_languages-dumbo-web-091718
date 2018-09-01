@@ -22,3 +22,25 @@ languages.each do |top_key, language|
 end   
 
 print reformat_languages(languages)
+
+#REFACTORING 1 ________________________
+
+def reformat_languages(languages)
+  new_languages = {}
+  languages.each do |type, hash|
+     #type => :functional || :oo
+     # hash without topKey
+    hash.each do |name, attributes|
+    #name => :erlang or :javascript
+    #attributes => {:type=>"interpreted"}
+
+       new_languages[name] ||= attributes
+      #IF language[name] is undifined then assign it the value of attributes, otherwise leave it alone. 
+
+      arr = Array.new
+      new_languages[name][:style] ||= (arr &&  (arr << type))
+    end
+  end
+ p new_languages
+end
+ p reformat_languages(languages)
